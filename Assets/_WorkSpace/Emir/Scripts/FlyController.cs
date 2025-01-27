@@ -6,11 +6,13 @@ public class FlyController : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
     public float moveSpeed = 10f;
+    public float moveYSpeed = 1f;
+    public float smoothValue = 10f;
     public Rigidbody rb;
     public Transform playerBody;
     public Transform playerCamera;
 
-    private float xRotation = 0f;
+    public Animator Animator;
 
     void Start()
     {
@@ -20,18 +22,13 @@ public class FlyController : MonoBehaviour
     void Update()
     {
 
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        if (Input.GetMouseButton(1))
+        {
+            Vector3 he = (playerBody.transform.position - playerCamera.transform.position).normalized;
+            playerBody.transform.forward = Vector3.Lerp(playerBody.transform.forward, he, smoothValue * Time.deltaTime);
 
-
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-
-
-        playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-
-        playerBody.Rotate(Vector3.up * mouseX);
+            playerBody.transform.rotation = Quaternion.Euler(0, playerBody.transform.rotation.eulerAngles.y, 0);
+        }
     }
 
     void FixedUpdate()
@@ -46,11 +43,14 @@ public class FlyController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl)) moveUpward = -1;
 
 
-        Vector3 moveDirection = (playerBody.forward * moveVertical) +
-                                (playerBody.right * moveHorizontal) +
-                                (Vector3.up * moveUpward);
+        Vector3 moveDirection = (playerBody.forward * moveVertical * moveSpeed) +
+                                (playerBody.right * moveHorizontal * (moveSpeed / 2)) +
+                                (Vector3.up * moveUpward * moveYSpeed);
 
 
-        rb.velocity = moveDirection * moveSpeed;
+        rb.velocity = moveDirection;
+
+        Animator.SetInteger("RotX", (int)moveHorizontal);
+        Animator.SetInteger("RotY", (int)moveVertical);
     }
 }

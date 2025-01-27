@@ -1,11 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Grandma : MonoBehaviour
 {
     public StateofAngerType StateofAngerType;
+
+    public Slider AngrySlider;
+    public TextMeshProUGUI AngryText;
+    public float angryDistance = 5f;
+    public float AngryValue;
+    public float AngryValuePerSecont = 0.2f;
+    public float AngryValueFactor = 5;
 
     public bool IsWalking;
 
@@ -22,14 +31,56 @@ public class Grandma : MonoBehaviour
     }
     private void Start()
     {
-        SetAngerType(StateofAngerType);
-    }
-    private void Update()
-    {
-
+        //SetAngerType(StateofAngerType.Happy);
     }
     private void LateUpdate()
     {
+        if (GetFlyDistance() < angryDistance)
+        {
+            if (!IsThereBarrier())
+            {
+                AngryValue += (1 / GetFlyDistance()) * AngryValueFactor * Time.deltaTime;
+            }
+            else
+            {
+                if (AngryValue > 0)
+                {
+                    AngryValue -= AngryValuePerSecont * Time.deltaTime;
+                }
+                else
+                {
+                    AngryValue = 0;
+                }
+
+            }
+        }
+        else
+        {
+            if (AngryValue > 0)
+            {
+                AngryValue -= AngryValuePerSecont * Time.deltaTime;
+            }
+            else
+            {
+                AngryValue = 0;
+            }
+        }
+        AngrySlider.value = AngryValue;
+        switch (AngryValue)
+        {
+            case > 85:
+                SetAngerType(StateofAngerType.Insane);
+                break;
+            case > 50:
+                SetAngerType(StateofAngerType.Angry);
+                break;
+            case > 35:
+                SetAngerType(StateofAngerType.Uneasy);
+                break;
+            default:
+                SetAngerType(StateofAngerType.Happy);
+                break;
+        }
     }
 
     public void GoTransform(Transform goTransform)
@@ -39,9 +90,16 @@ public class Grandma : MonoBehaviour
 
     public float GetDistance(Transform goTransform)
     {
-        var temp = goTransform.position - transform.position;
-        temp = new Vector3(temp.x, 0, temp.z);
-        return temp.magnitude;
+        try
+        {
+            var temp = goTransform.position - transform.position;
+            temp = new Vector3(temp.x, 0, temp.z);
+            return temp.magnitude;
+        }
+        catch (System.Exception)
+        {
+        }
+        return 0;
     }
 
     public float GetFlyDistance()
@@ -73,6 +131,11 @@ public class Grandma : MonoBehaviour
 
     public void SetAngerType(StateofAngerType stateofAngerType)
     {
+        if (stateofAngerType == StateofAngerType)
+        {
+            return;
+        }
+        AngryText.text = stateofAngerType.ToString();
         switch (stateofAngerType)
         {
             case StateofAngerType.Insane:
@@ -95,11 +158,8 @@ public class Grandma : MonoBehaviour
                 t4.NextState = GrandmaStateController.GetRandomState();
                 GrandmaStateController.ChangeState(t4);
                 break;
-
         }
-
-
-
+        StateofAngerType = stateofAngerType;
     }
 }
 public class GrandmaAnimations

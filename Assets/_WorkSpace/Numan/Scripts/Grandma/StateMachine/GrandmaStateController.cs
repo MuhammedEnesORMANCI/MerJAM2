@@ -6,7 +6,7 @@ using UnityEngine;
 public class GrandmaStateController : MonoBehaviour
 {
 
-    private StateBase currentState;
+    public StateBase currentState;
 
     private Grandma Grandma;
 

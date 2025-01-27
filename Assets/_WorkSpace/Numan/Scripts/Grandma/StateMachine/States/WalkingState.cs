@@ -17,15 +17,27 @@ public class WalkingState : StateBase
 
     public override void UpdateState(Grandma grandma)
     {
-        if (grandma.GetDistance(NextState.StateTransform) > 0.2f)
+        if (grandma is null)
         {
-            grandma.GoTransform(NextState.StateTransform);
+            //GameManager.Instance.Grandma.GrandmaStateController.ChangeState( GameManager.Instance.Grandma.GrandmaStateController.GetRandomState());
+            return;
+        }
+        if (NextState is null || NextState.StateTransform is null)
+        {
+            //grandma.GrandmaStateController.ChangeState(grandma.GrandmaStateController.GetRandomState());
+            Debug.Log("YurumeBiti");
         }
         else
         {
-            grandma.GrandmaStateController.ChangeState(NextState);
-            Debug.Log("YurumeBiti");
+            if (grandma.GetDistance(NextState.StateTransform) > 0.2f)
+            {
+                grandma.GoTransform(NextState.StateTransform);
+            }
+            else
+            {
+                grandma.GrandmaStateController.ChangeState(NextState);
+                Debug.Log("YurumeBiti");
+            }
         }
-
     }
 }
