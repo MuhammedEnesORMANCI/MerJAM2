@@ -6,6 +6,8 @@ public class FanScript : MonoBehaviour
 {
     [SerializeField] GameObject Target;
 
+    [SerializeField] GameObject FaniktirmeNoktai;
+
     [SerializeField] int MaxAngel;
 
     [SerializeField] float MaxDistance;
@@ -30,33 +32,37 @@ public class FanScript : MonoBehaviour
 
     Vector3 NDirection;
 
+    int a;
     void Update()
     {
 
+
         FanMeka();
+
+
 
     }
 
     public void FanMeka()
     {
-        direction = Target.transform.position - transform.position;
+        direction = Target.transform.position - FaniktirmeNoktai.transform.position;
 
         NDirection = direction.normalized;
 
-        AnlikMesafe = Vector3.Distance(transform.position, Target.transform.position);
-
-        Debug.Log(AnlikMesafe);
-
-        Debug.DrawRay(transform.position, transform.forward * 4, Color.red);
-
-        Debug.DrawLine(transform.position, Target.transform.position);
-
-        Angel = Vector3.Angle(transform.forward, direction);   // beli bi hzı ulaşinca m sınırlask acaba
+        AnlikMesafe = Vector3.Distance(FaniktirmeNoktai.transform.position, Target.transform.position);
 
 
 
-        bool isOpen = Physics.Linecast(transform.position + Vector3.forward, Target.transform.position + Vector3.forward, ObjectLayer);// bu arasına eşya koyarız belki diye
-                                                                                                                                       // Bu önünde nesne olursa diye var
+        Debug.DrawRay(FaniktirmeNoktai.transform.position, -FaniktirmeNoktai.transform.forward * 4, Color.red);
+
+        Debug.DrawLine(FaniktirmeNoktai.transform.position, Target.transform.position);
+
+        Angel = Vector3.Angle(-FaniktirmeNoktai.transform.forward, direction);   // beli bi hzı ulaşinca m sınırlask acaba
+
+
+
+        bool isOpen = Physics.Linecast(FaniktirmeNoktai.transform.position + -Vector3.forward, Target.transform.position + Vector3.forward, ObjectLayer);// bu arasına eşya koyarız belki diye
+                                                                                                                                                         // Bu önünde nesne olursa diye var
 
         vec3Pos = new Vector3(Target.transform.position.x, Target.transform.position.y, Target.transform.position.z);
 
@@ -77,6 +83,7 @@ public class FanScript : MonoBehaviour
                 // Target.GetComponent<Rigidbody>().velocity = MaxSpeed * transform.forward * 10 / direction.z;// bu başka artanatif
 
                 //Target.GetComponent<Rigidbody>().velocity = MaxSpeed * NDirection * 10 / direction.z;
+
 
                 Target.GetComponent<Rigidbody>().AddForce(MaxSpeed * NDirection * 4 / direction.z, ForceMode.Acceleration);
 

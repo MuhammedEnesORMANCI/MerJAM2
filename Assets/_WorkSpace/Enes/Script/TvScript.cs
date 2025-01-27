@@ -6,11 +6,14 @@ public class TvScript : MonoBehaviour
 {
     [SerializeField] GameObject Target;
 
+    [SerializeField] GameObject CekimNoktasi;
+
     [SerializeField] int MaxAngel;
 
     [SerializeField] float MaxDistance;
 
     [SerializeField] float MaxSpeed;
+    [SerializeField] float MinMesafe;
 
     [SerializeField] LayerMask ObjectLayer;
     [SerializeField] Vector3 vec3Pos;
@@ -33,33 +36,33 @@ public class TvScript : MonoBehaviour
 
     public void TvMeka()
     {
-        direction = Target.transform.position - transform.position;
+        direction = Target.transform.position - CekimNoktasi.transform.position;
 
-        NDirection = -direction.normalized;
+        NDirection = direction.normalized;
 
-        AnlikMesafe = Vector3.Distance(transform.position, Target.transform.position);
+        AnlikMesafe = Vector3.Distance(CekimNoktasi.transform.position, Target.transform.position);
 
         //Debug.Log(AnlikMesafe);
 
-        Debug.DrawRay(transform.position, transform.forward * 4, Color.red);
+        Debug.DrawRay(CekimNoktasi.transform.position, -CekimNoktasi.transform.forward * 10, Color.red);
 
-        Debug.DrawLine(transform.position, Target.transform.position);
+        Debug.DrawLine(CekimNoktasi.transform.position, Target.transform.position);
 
-        Angel = Vector3.Angle(transform.forward, direction);
+        Angel = Vector3.Angle(-CekimNoktasi.transform.forward, direction);
 
 
 
-        bool isOpen = Physics.Linecast(transform.position + Vector3.forward, Target.transform.position + Vector3.forward, ObjectLayer);// bu arasına eşya koyarız belki diye
+        //bool isOpen = Physics.Linecast(transform.position + -Vector3.forward, Target.transform.position + Vector3.forward, ObjectLayer);// bu arasına eşya koyarız belki diye
         // Bu önünde nesne olursa diye var
 
 
 
-        if (isOpen)
+        if (true)//isopen
         {
-            if (Angel < MaxAngel && AnlikMesafe < MaxDistance)
+            if (Angel < MaxAngel && AnlikMesafe < MaxDistance && AnlikMesafe > MinMesafe)
             {
 
-                Target.GetComponent<Rigidbody>().AddForce(MaxSpeed * NDirection * 4 / direction.z, ForceMode.Acceleration);
+                Target.GetComponent<Rigidbody>().AddForce(MaxSpeed * NDirection * 1 / direction.z, ForceMode.Acceleration);
 
 
             }
