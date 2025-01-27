@@ -28,6 +28,9 @@ public class FanScript : MonoBehaviour
     [SerializeField] float XMaxAngelWt;
     [SerializeField] float XMinAngelWt;
 
+    public GameObject Engel;
+    public GameObject fAN;
+
     Vector3 direction;
 
     Vector3 NDirection;
@@ -35,7 +38,7 @@ public class FanScript : MonoBehaviour
     int a;
     void Update()
     {
-
+        
 
         FanMeka();
 
@@ -45,6 +48,8 @@ public class FanScript : MonoBehaviour
 
     public void FanMeka()
     {
+
+        /*
         direction = Target.transform.position - FaniktirmeNoktai.transform.position;
 
         NDirection = direction.normalized;
@@ -92,6 +97,7 @@ public class FanScript : MonoBehaviour
 
 
         }
+        */
 
     }
 }

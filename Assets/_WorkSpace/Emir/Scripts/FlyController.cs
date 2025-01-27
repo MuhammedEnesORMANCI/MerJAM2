@@ -14,6 +14,8 @@ public class FlyController : MonoBehaviour
 
     public Animator Animator;
 
+    public static bool acabilirmi;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
