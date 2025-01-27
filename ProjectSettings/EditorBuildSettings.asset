@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/_WorkSpace/Numan/MainMenu.unity
+    guid: ce2907d9b6aab3f4f9a5a3bce0439778
+  - enabled: 1
+    path: Assets/_WorkSpace/Numan/BeforeGameAnimation.unity
+    guid: 1c0e0124653ccea41820764f66075e59
+  - enabled: 1
+    path: Assets/_WorkSpace/Numan/Game.unity
+    guid: f6989b13b9efb394a93a5251dafb6bc9
   m_configObjects: {}
