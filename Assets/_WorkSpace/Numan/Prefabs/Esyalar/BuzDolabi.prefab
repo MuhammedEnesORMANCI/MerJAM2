@@ -461,6 +461,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3391562110389310003}
+  - component: {fileID: 1690051362921011056}
+  - component: {fileID: 3368820845688730098}
+  - component: {fileID: 6173662027995666407}
+  - component: {fileID: 3029805263798606284}
   m_Layer: 0
   m_Name: BuzDolabi
   m_TagString: Untagged
@@ -485,6 +489,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1690051362921011056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619669370705381513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb79dffa7f7285a40955626a832ab57e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoorTransform: {fileID: 5446475818689982938}
+--- !u!65 &3368820845688730098
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619669370705381513}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.2114818, z: 0.70928377}
+  m_Center: {x: 5.1225927e-16, y: 0.72303116, z: -0.46395284}
+--- !u!114 &6173662027995666407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619669370705381513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1430ca937fde14144a3db8567db20adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsFront: 1
+  Door: {fileID: 1690051362921011056}
+--- !u!95 &3029805263798606284
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619669370705381513}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8ab1cb3c9e4bd4a469852376d8f9a38b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2697803276752085415
 GameObject:
   m_ObjectHideFlags: 0
