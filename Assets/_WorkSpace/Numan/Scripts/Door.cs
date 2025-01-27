@@ -6,7 +6,7 @@ public class Door : MonoBehaviour
 
     public Collider collider;
 
-    private Animator animator;
+    public Animator animator;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -18,19 +18,26 @@ public class Door : MonoBehaviour
 
     public void Open(bool isFront)
     {
-        if (!collider.enabled)
+        try
         {
-            return;
+            if (!collider.enabled)
+            {
+                return;
+            }
+            if (isFront)
+            {
+                animator.Play("Open");
+            }
+            else
+            {
+                animator.Play("OpenReverse");
+            }
+            GameManager.Instance.OpenDoorSound();
         }
-        if (isFront)
+        catch (System.Exception)
         {
-            animator.Play("Open");
         }
-        else
-        {
-            animator.Play("OpenReverse");
-        }
-        GameManager.Instance.OpenDoorSound();
+
     }
     public void Close()
     {
@@ -46,5 +53,7 @@ public class Door : MonoBehaviour
     {
         DoorTransform.rotation = Quaternion.Euler(DoorTransform.rotation.eulerAngles.x, DoorTransform.rotation.eulerAngles.y, 135);
         collider.enabled = false;
+        animator.Play("Open");
+        GameManager.Instance.OpenDoorSound();
     }
 }

@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoorTransform: {fileID: 5081223526400646904}
-  collider: {fileID: 0}
+  collider: {fileID: 3921073191906716052}
 --- !u!95 &5349792149363796261
 Animator:
   serializedVersion: 5
